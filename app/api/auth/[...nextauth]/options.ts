@@ -55,7 +55,7 @@ export const options: NextAuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }) {
-      console.log("USER", user);
+      // console.log("USER", user);
       if (user) {
         // Cast user to the UserValue type
         token.accessToken = user.accessToken as string;

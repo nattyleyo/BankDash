@@ -11,7 +11,7 @@ export function Toast() {
     <Button
       variant="outline"
       onClick={() => {
-        console.log("toooooooooo");
+        // console.log("toooooooooo");
         toast({
           title: "I got you",
           description: "Friday, February 10, 2023 at 5:57 PM",

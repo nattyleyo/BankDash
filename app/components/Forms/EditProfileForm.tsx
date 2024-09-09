@@ -61,7 +61,7 @@ const EditProfileForm = () => {
 
   const onSubmit = async (data: FormData) => {
     const { confirmPassword, ...updatedUserData } = data;
-    console.log("Updating user profile:", updatedUserData);
+    // console.log("Updating user profile:", updatedUserData);
 
     try {
       const responseData = await UserService.update(
@@ -69,9 +69,9 @@ const EditProfileForm = () => {
         "accessToken"
       ); // Call the update method
       if (responseData.success) {
-        console.log("Profile update successful:", responseData.message);
+        // console.log("Profile update successful:", responseData.message);
       } else {
-        console.error("Profile update failed:", responseData.message);
+        // console.error("Profile update failed:", responseData.message);
       }
     } catch (error) {
       console.error("An error occurred during profile update:", error);

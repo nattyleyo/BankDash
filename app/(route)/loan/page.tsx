@@ -27,7 +27,7 @@ const Loan = () => {
   useEffect(() => {
     setLoading(true);
     fetchLoan();
-    console.log(getLoan, "--");
+    // console.log(getLoan, "--");
   }, [accessToken]);
   return (
     <div className="px-5 space-y-4 mt-4 w-full h-screen">

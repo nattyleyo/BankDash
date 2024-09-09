@@ -44,7 +44,7 @@ const Services = () => {
         }
       );
       setServices(response.data.data.content);
-      console.log(services);
+      // console.log(services);
     } catch (error) {
       console.error("There was a problem with the axios request:", error);
     }
@@ -121,7 +121,7 @@ const Services = () => {
             {services.length > 0 ? (
               services.map((service, index) => (
                 <>
-                  {console.log(service.icon)}
+                  {/* {console.log(service.icon)} */}
                   <DescriptionCard
                     key={service.id}
                     img={service.icon}

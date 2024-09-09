@@ -64,16 +64,20 @@ export function DebitCreditOver() {
     null
   );
   const [dateRange, setDateRange] = useState("");
-  const {data:session} = useSession();
-  const accessToken =  session?.accessToken as string;
-  console.log(accessToken , "accessTokenDebit")
-  const income = useAppSelector((state) => state.transactions.income )
-  const expense = useAppSelector((state) => state.transactions.expense )
+  const { data: session } = useSession();
+  const accessToken = session?.accessToken as string;
+  // console.log(accessToken , "accessTokenDebit")
+  const income = useAppSelector((state) => state.transactions.income);
+  const expense = useAppSelector((state) => state.transactions.expense);
   useEffect(() => {
     const fetchData = async () => {
       // console.log(ac)
       try {
-        const ans: GroupedTransactions | undefined = await DebitCredit(accessToken , income , expense);
+        const ans: GroupedTransactions | undefined = await DebitCredit(
+          accessToken,
+          income,
+          expense
+        );
         if (ans) {
           setTransactions(ans);
           processWeekData(ans, currentWeek);

@@ -22,13 +22,13 @@ import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 const Center = () => {
   const { data: session } = useSession();
   const accessToken = session?.accessToken as string;
-  
-  console.log(session?.accessToken, "token");
+
+  // console.log(session?.accessToken, "token");
   // Update initial card and tran data using the custom hook
   useCardDispatch(accessToken);
   useTranDispatch(accessToken);
   const income = useAppSelector((state) => state.transactions.income);
-  console.log(income, "hell");
+  // console.log(income, "hell");
 
   const CardData: Card[] = useAppSelector((state) => state.cards.cards);
   const TranData: TransactionType[] = useAppSelector(

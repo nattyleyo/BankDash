@@ -46,7 +46,7 @@ export function AreaComp({ data }: dataProps) {
     };
   });
 
-  console.log(chartData);
+  // console.log(chartData);
   return (
     <Card className="w-full border-0 shadow-none bg-transparent ">
       <CardContent className="p-0">

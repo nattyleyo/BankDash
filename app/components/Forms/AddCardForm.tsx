@@ -24,7 +24,7 @@ const AddCardForm = () => {
   const dispatch = useAppDispatch();
   const accessToken = session?.accessToken as string;
   const onSubmit = async (data: Card) => {
-    console.log("form", data);
+    // console.log("form", data);
     const cardData = {
       balance: data.balance,
       cardHolder: data.cardHolder,

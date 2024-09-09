@@ -28,7 +28,7 @@ const InvestmentPage = () => {
   const investmentData: InvestmentData = useAppSelector(
     (state) => state.user.investment
   );
-  console.log(investmentData, "investment Data");
+  // console.log(investmentData, "investment Data");
 
   useEffect(() => {
     const getData = () => {

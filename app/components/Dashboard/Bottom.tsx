@@ -33,9 +33,9 @@ const Bottom = () => {
   const handleScroll = () => {
     if (containerRef.current) {
       containerRef.current.scrollLeft += 200;
-      console.log("scrolled");
+      // console.log("scrolled");
     } else {
-      console.log("not scrolled");
+      // console.log("not scrolled");
     }
   };
   const people: any = [1, 2, 3];
@@ -58,7 +58,7 @@ const Bottom = () => {
         const data = await TransactionService.getQuickTransfer(accessToken);
 
         setQuickData(data);
-        console.log(quickData, "quick");
+        // console.log(quickData, "quick");
       } catch (error) {
         console.log("error", error);
         console.error("Error fetching quick data:", error);
