@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import Select from "react-select";
 import UserValue from "@/types/UserValue";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +11,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faEyeSlash,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
+import { ToastAction } from "@/components/ui/toast";
+import { toast } from "@/components/ui/use-toast";
 
 type FormData = Omit<UserValue, "password"> & {
   password: string;
@@ -32,12 +39,21 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
     watch,
     trigger,
   } = useForm<FormData>();
 
   const confirmData = watch("password");
   const route = useRouter();
+  const [submt, setSubmt] = useState(false);
+  const [eye1, setEye1] = useState(false);
+  const [eye2, setEye2] = useState(false);
+  const countries = [
+    { value: "USA", label: "United States" },
+    { value: "CAN", label: "Canada" },
+    { value: "ETH", label: "Ethiopia" },
+  ];
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLFormElement>) => {
     if (event.key === "Enter") {
@@ -48,7 +64,8 @@ const SignUpForm = () => {
 
   const onSubmit = async (data: FormData) => {
     const { confirmPassword, ...userData } = data;
-    console.log("DATA", data);
+    // console.log("DATA", data);
+    setSubmt(!submt);
     userData.profilePicture = "/assets/profile.png";
     userData.preference.timeZone = gmtTimeZone;
     userData.preference.twoFactorAuthentication = false;
@@ -57,8 +74,22 @@ const SignUpForm = () => {
       const responseData = await AuthService.register(userData);
       if (responseData.success) {
         console.log("Signup successful:", responseData.message);
+        toast({
+          title: "SignUp Successfully",
+          // description: `${date}`,
+          // action: (
+          //   <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+          // ),
+        });
+
         route.push("/login");
       } else {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with SignUp.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
         console.error("Signup failed:", responseData.message);
       }
     } catch (error) {
@@ -131,7 +162,7 @@ const SignUpForm = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        onKeyPress={handleKeyPress}
+        // onKeyPress={handleKeyPress}
         className="xxs:w-[96%] xxs:mt-[7rem] md:w-[55%] md:mt-0 flex flex-col justify-center items-center"
       >
         {step === 1 && (
@@ -153,29 +184,49 @@ const SignUpForm = () => {
               </h3>
             </div>
             {/* <ProgressComp /> */}
-            <div className="flex gap-3 w-full">
-              <div className="flex flex-col w-[48%]">
+            <div className="flex xxs:flex-col md:flex-row gap-3 w-full">
+              <div className="flex flex-col xxs:w-full md:w-[48%]">
                 <label className="mb-1 text-slate-500" htmlFor="userName">
                   Fullname
                 </label>
                 <input
-                  {...register("name", { required: "* FullName is required" })}
+                  {...register("name", {
+                    required: "* FullName is required",
+                    minLength: {
+                      value: 4,
+                      message: "* FullName should be between 4-20 char",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "* FullName should be between 4-20 char",
+                    },
+                  })}
                   placeholder="John Doe"
                   id="userName"
                   className="p-3 border-2 border-[#0d0b6f13] rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE]  "
                   type="text"
                 />
                 {errors.name && (
-                  <p className="text-[#1814F3]">{errors.name.message}</p>
+                  <p className="text-[#1814F3] xxs:text-[14px] md:text-base mt-1">
+                    {errors.name.message}
+                  </p>
                 )}
               </div>
-              <div className="flex flex-col w-[48%]">
+              <div className="flex flex-col xxs:w-full md:w-[48%]">
                 <label className="mb-1 text-slate-500" htmlFor="userName">
                   Username
                 </label>
                 <input
                   {...register("username", {
                     required: "* Username is required",
+                    minLength: {
+                      value: 4,
+                      message: "* Username should be between 4-20 char",
+                    },
+                    maxLength: {
+                      value: 20,
+                      message: "* Username should be between 4-20 char",
+                    },
                   })}
                   placeholder="@John"
                   id="userName"
@@ -183,7 +234,9 @@ const SignUpForm = () => {
                   type="text"
                 />
                 {errors.username && (
-                  <p className="text-[#1814F3]">{errors.username.message}</p>
+                  <p className="text-[#1814F3] xxs:text-[14px] md:text-base mt-1">
+                    {errors.username.message}
+                  </p>
                 )}
               </div>
             </div>
@@ -193,61 +246,46 @@ const SignUpForm = () => {
                 Email
               </label>
               <input
-                {...register("email", { required: "* Email is required" })}
+                {...register("email", {
+                  required: "* Email is required",
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "* Invalid email Address",
+                  },
+                  validate: {
+                    notyahoo: (fieldvalue) => {
+                      return (
+                        !fieldvalue.endsWith("yahoo.com") ||
+                        "* You can not use Yahoo email"
+                      );
+                    },
+                  },
+                })}
                 placeholder="example@gmail.com"
                 id="userName"
                 className="p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE]  "
                 type="text"
               />
               {errors.email && (
-                <p className="text-[#1814F3]">{errors.email.message}</p>
+                <p className="text-[#1814F3] xxs:text-[14px] md:text-base mt-1">
+                  {errors.email.message}
+                </p>
               )}
             </div>
-            <div className="w-full password-box flex gap-1 flex-col">
+            <div className="w-full password-box flex gap-1 flex-col relative">
               <label htmlFor="password" className="mb-1 text-slate-500">
                 Password
               </label>
               <input
-                type="password"
+                type={eye1 ? "text" : "password"}
                 className="password p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE] "
                 placeholder="Enter password"
                 {...register("password", {
-                  required: "*Password is required",
-                  pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
-                    message:
-                      "* Password must contain be at least one letter and one number",
-                  },
-                  minLength: {
-                    value: 6,
-                    message: "* Password must be at least 6 characters long",
-                  },
-                })}
-              />
-              <p
-                className="error text-[#1814F3]"
-                style={{
-                  display: errors.password?.message == null ? "none" : "flex",
-                }}
-              >
-                {errors.password?.message}
-              </p>
-            </div>
-
-            <div className="w-full password-box flex gap-1 flex-col">
-              <label htmlFor="password" className="mb-1 text-slate-500">
-                Confirm
-              </label>
-              <input
-                type="password"
-                className="password p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE] "
-                placeholder="confirm"
-                {...register("confirmPassword", {
                   required: "* Password is required",
                   pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/,
                     message:
-                      "* Password must contain be at least one letter and one number",
+                      "* Password must contain at least one-letter & one-number",
                   },
                   minLength: {
                     value: 6,
@@ -255,15 +293,58 @@ const SignUpForm = () => {
                   },
                 })}
               />
-              <p
-                className="error text-[#1814F3]"
-                style={{
-                  display:
-                    errors.confirmPassword?.message == null ? "none" : "flex",
-                }}
-              >
-                {errors.confirmPassword?.message}
-              </p>
+              <FontAwesomeIcon
+                onClick={() => setEye1(!eye1)}
+                icon={eye1 ? faEye : faEyeSlash}
+                className=" absolute right-3 top-12 text-gray-600 cursor-pointer hover:text-gray-800"
+              />
+              {errors.password && (
+                <p
+                  className="error text-[#1814F3] xxs:text-[14px] md:text-base mt-1"
+                  style={{
+                    display: errors.password?.message == null ? "none" : "flex",
+                  }}
+                >
+                  {errors.password?.message}
+                </p>
+              )}
+            </div>
+
+            <div className="w-full password-box flex gap-1 flex-col relative">
+              <label htmlFor="password" className="mb-1 text-slate-500">
+                Confirm
+              </label>
+              <input
+                type={eye2 ? "text" : "password"}
+                className="password p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE] "
+                placeholder="confirm"
+                {...register("confirmPassword", {
+                  required: "* Password is required",
+                  validate: {
+                    passConf: (fieldvalue) => {
+                      return (
+                        fieldvalue === confirmData || "* Password do not match"
+                      );
+                    },
+                  },
+                })}
+              />
+              <FontAwesomeIcon
+                onClick={() => setEye2(!eye2)}
+                icon={eye2 ? faEye : faEyeSlash}
+                className=" absolute right-3 top-12 text-gray-600 cursor-pointer hover:text-gray-800"
+              />
+              {errors.confirmPassword && (
+                <p
+                  className="error text-[#1814F3] xxs:text-[14px] md:text-base mt-1"
+                  style={{
+                    display:
+                      errors.confirmPassword?.message == null ? "none" : "flex",
+                  }}
+                >
+                  {errors.confirmPassword?.message}
+                </p>
+              )}
             </div>
           </div>
         )}
@@ -326,12 +407,14 @@ const SignUpForm = () => {
               <label className="mb-1 text-slate-500" htmlFor="country">
                 Country
               </label>
-              <input
-                {...register("country")}
+              <Select
                 id="country"
-                placeholder="USA"
-                className="p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE]"
-                type="text"
+                options={countries}
+                className="basic-single"
+                classNamePrefix="select"
+                placeholder="Select a country"
+                onChange={(option: any) => setValue("country", option.value)}
+                isSearchable
               />
               {errors.country && (
                 <p className="text-[#1814F3]">{errors.country.message}</p>
@@ -396,13 +479,36 @@ const SignUpForm = () => {
                 Date of Birth
               </label>
               <input
-                {...register("dateOfBirth")}
+                {...register("dateOfBirth", {
+                  required: "Date of Birth is required",
+                  validate: (value) => {
+                    const selectedDate = new Date(value);
+                    const today = new Date();
+                    const age =
+                      today.getFullYear() - selectedDate.getFullYear();
+                    const isBeforeBirthdayThisYear =
+                      today.getMonth() < selectedDate.getMonth() ||
+                      (today.getMonth() === selectedDate.getMonth() &&
+                        today.getDate() < selectedDate.getDate());
+
+                    // If the birthday hasn't occurred this year, subtract 1 from the age.
+                    if (isBeforeBirthdayThisYear) {
+                      return (
+                        age - 1 >= 18 || "* You must be at least 18 years old"
+                      );
+                    }
+
+                    return age >= 18 || "* You must be at least 18 years old";
+                  },
+                })}
                 id="dateOfBirth"
                 type="date"
                 className="p-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-[#4640DE]"
               />
               {errors.dateOfBirth && (
-                <p className="text-[#1814F3]">{errors.dateOfBirth.message}</p>
+                <p className="text-[#1814F3] xxs:text-[14px] md:text-base">
+                  {errors.dateOfBirth.message}
+                </p>
               )}
             </div>
 
@@ -511,17 +617,13 @@ const SignUpForm = () => {
           ) : (
             <button
               type="submit"
-              onClick={() => {
-                handleSubmit(onSubmit);
-                // setFlag(!flag);
-              }}
-              // disabled={flag}
+              disabled={submt}
               className=" flex gap-3 items-center bg-[#1814F3] text-white px-6 py-3 rounded-md"
             >
-              {/* <FontAwesomeIcon
+              <FontAwesomeIcon
                 icon={faSpinner}
-                className={flag ? "visible text-2xl animate-spin" : "hidden"}
-              /> */}
+                className={submt ? "visible text-2xl animate-spin" : "hidden"}
+              />
               Submit
             </button>
           )}
