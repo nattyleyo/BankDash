@@ -162,7 +162,6 @@ const SignUpForm = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        // onKeyPress={handleKeyPress}
         className="xxs:w-[96%] xxs:mt-[7rem] md:w-[55%] md:mt-0 flex flex-col justify-center items-center"
       >
         {step === 1 && (
