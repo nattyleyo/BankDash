@@ -16,7 +16,7 @@ const NavBar = ({ openSidebar }: { openSidebar: () => void }) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const userData = useAppSelector((state) => state.user);
-  console.log(userData, '--')
+  console.log(userData, "--");
   const onDarkMode = () => {
     dispatch(toggleDarkMode());
   };
@@ -85,11 +85,11 @@ const NavBar = ({ openSidebar }: { openSidebar: () => void }) => {
         </button>
         <button>
           <Image
-            className="rounded-full"
             src={userData.user?.profilePicture || "/assets/profile-1.png"}
             alt="user image"
-            width={64}
-            height={64}
+            width={32}
+            height={24}
+            className="rounded-full xxs:w-[32px] md:w-[64px]"
           />
         </button>
       </div>

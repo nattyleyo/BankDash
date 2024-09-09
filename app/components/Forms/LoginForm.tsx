@@ -7,7 +7,7 @@ import LoginValue from "@/types/LoginValue";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = () => {
   const [error, setError] = useState("");
@@ -22,16 +22,13 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginValue) => {
     setLoading(true);
     setError("");
-    console.log("login dara", data);
     const result = await signIn("credentials", {
       redirect: false,
       userName: data.userName,
       password: data.password,
     });
-    console.log("Login DATA RESULT", result);
 
     if (result?.error) {
-      console.log("error", result.error);
       setError("Invalid Credential");
       setLoading(false);
     } else {
@@ -40,17 +37,31 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-2 max-w-[408px] min-w-72 p-10 bg-[#ffff] rounded-2xl border-[0.3px] border-solid border-[#1814f326] shadow-sm shadow-blue-100 z-20">
+    <div className="relative flex flex-col justify-center gap-2 max-w-[408px] min-w-72 p-10 bg-white rounded-2xl border-[0.3px] border-solid border-[#1814f326] shadow-sm shadow-blue-100 z-20">
+      {/* Close Button */}
+      <button
+        onClick={() => router.push("/")}
+        className="absolute top-4 right-4 p-2 bg-slate-200 hover:bg-slate-300 rounded-full"
+        aria-label="Close and go back to home"
+      >
+        <FontAwesomeIcon icon={faTimes} className="text-slate-600 text-lg" />
+      </button>
+
       <div className="flex flex-col gap-2 justify-center items-center ">
         <div className="flex items-center circle p-4 pt-5 bg-blue-50 rounded-full">
-          <Image src="/assets/logo-blue.svg" width={48} height={48} alt="" />
+          <Image
+            src="/assets/logo-blue.svg"
+            width={48}
+            height={48}
+            alt="Logo"
+          />
         </div>
         <h1 className="min-w-[408px] p-2 text-slate-800 font-extrabold text-3xl text-center">
           Welcome <span className="text-[#1814F3]">Back.</span>
         </h1>
       </div>
       <form
-        className="pt-3 flex flex-col gap-2 "
+        className="pt-3 flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
         {error && <p className="text-[#1814F3] mt-2 text-center">{error}</p>}
@@ -63,7 +74,7 @@ const LoginForm = () => {
             {...register("userName", { required: "UserName is required" })}
             placeholder="Enter UserName"
             id="userName"
-            className="p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE]  "
+            className="p-3 border-2 border-gray-200 rounded-lg placeholder:text-slate-400 focus:outline-none focus:border-[#4640DE]"
             type="text"
             disabled={loading}
           />

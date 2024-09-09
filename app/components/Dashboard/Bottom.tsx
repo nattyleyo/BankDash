@@ -69,14 +69,14 @@ const Bottom = () => {
   }, [accessToken]);
 
   return (
-    <section className="Botom flex gap-6 xs:flex-col lg:flex-row ">
+    <section className="Botom flex gap-6 xxs:flex-col lg:flex-row ">
       <div className="cards-container sm:w-full lg:w-[45%]  center-content flex flex-col gap-6">
         <h1 className="text-xl font-semibold text-colorBody-1 dark:text-gray-300">
           Quick Transfer
         </h1>
         <div className="flex gap-6 bg-white dark:bg-[#232328] rounded-3xl  p-6">
           <div className="profle-box w-full flex flex-col gap-4">
-            <div className="w-full flex gap-2 items-center   ">
+            <div className="w-full flex gap-2 items-center relative ">
               <div className=" flex overflow-hidden" ref={containerRef}>
                 {quickData.length > 0 ? (
                   quickData.map((account) => (
@@ -112,9 +112,9 @@ const Bottom = () => {
                   </div>
                 )}
               </div>
-              <button className="relative flex p-6 py-7 items-center justify-center bg-white dark:bg-gray-700 dark:shadow-gray-500 shadow-sm shadow-blue-300 rounded-full">
+              <button className="xxs: absolute xxs:right-2 xxs:top-0 xxs:p-2 md:relative md:right-0 flex p-6 py-7 items-center justify-center bg-white dark:bg-gray-700 dark:shadow-gray-500 shadow-sm shadow-blue-300 rounded-full">
                 <FontAwesomeIcon
-                  icon={faGreaterThan}
+                  icon={faArrowRight}
                   className="w-5 font-normal dark:text-gray-300"
                   onClick={handleScroll}
                 />

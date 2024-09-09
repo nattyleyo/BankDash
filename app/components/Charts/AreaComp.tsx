@@ -52,7 +52,7 @@ export function AreaComp({ data }: dataProps) {
       <CardContent className="p-0">
         <ChartContainer
           config={chartConfig}
-          className=" w-full min-h-[100px] h-52"
+          className=" w-[92%] min-h-[100px] h-52"
         >
           <AreaChart
             accessibilityLayer

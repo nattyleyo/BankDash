@@ -48,11 +48,11 @@ const chartConfig = {
 export function PieComp() {
   return (
     <div className="flex w-full it gap-6 p-8 bg-white dark:bg-[#232328]  rounded-3xl">
-      <Card className="w-full flex flex-col border-0 shadow-none bg-transparent">
+      <Card className="w-full flex flex-col justify-center items-center border-0 shadow-none bg-transparent">
         <CardContent className="flex pb-0 p-0">
           <ChartContainer
             config={chartConfig}
-            className="sm:w-full lg:w-[330px] lg:h-64"
+            className="xxs:h-56 sm:w-full lg:w-[330px] lg:h-64"
           >
             <PieChart className=" ">
               <ChartTooltip

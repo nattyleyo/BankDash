@@ -35,6 +35,13 @@ const config: Config = {
     // },
     extend: {
       keyframes: {
+        typing: {
+          "0%": { width: "0%" },
+          "100%": { width: "60%" },
+        },
+        blink: {
+          "50%": { borderColor: "transparent" },
+        },
         rotateBackAndForth: {
           "0%": { transform: "rotate(0deg)" },
           "50%": { transform: "rotate(180deg)" },
@@ -42,6 +49,9 @@ const config: Config = {
         },
       },
       animation: {
+        typing:
+          "typing 3s steps(40, end) 1s forwards, blink .75s step-end infinite",
+        delay: "delay 1s",
         rotateBackAndForth: "rotateBackAndForth 2s ease-in-out infinite",
       },
       fontFamily: {

@@ -50,7 +50,7 @@ const Sidebar = ({
   const menuItems = [
     {
       label: "Dashboard",
-      url: "/",
+      url: "/dashboard",
       icon: "icon-home",
     },
     {
@@ -95,7 +95,7 @@ const Sidebar = ({
     },
     {
       label: "LogOut",
-      url: "/login",
+      url: "/",
       icon: "icon-logout",
     },
   ];
@@ -145,9 +145,7 @@ const Sidebar = ({
             )}
             {item.label === "LogOut" ? (
               <button
-                onClick={() =>
-                  signOut({ redirect: true, callbackUrl: "/login" })
-                }
+                onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
                 className="flex items-center gap-x-6 relative py-3"
               >
                 <div
