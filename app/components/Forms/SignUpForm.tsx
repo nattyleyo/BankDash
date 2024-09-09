@@ -78,40 +78,47 @@ const SignUpForm = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <div className="flex xxs:w-[98%] xs:w-[85%] sm:w-[70%] lg:w-[55%] lg:min-w-[900px] items-center justify-center bg-white rounded-xl g-6 relative p-1">
-      <div className="left xxs:hidden w-[50%] lg:flex flex-col items-center justify-stretch gap-3 bg-[#1814F3] bg-gradient-to-b from-[#1814F3] to-[#03032A] p-[36px] py-[72px] rounded-xl ">
-        <h1 className="headline text-center font-semibold text-white text-[36px]">
+    <div className="flex xxs:w-full xxs:flex-col xs:w-[96%] sm:w-[86%] md:flex-row lg:w-[55%] lg:min-w-[900px] items-center justify-center bg-white rounded-xl g-6 relative p-1">
+      <div className="left xxs:w-[96%] xxs:p-3 xxs:fixed xxs:top-2 xs:w-[88%] sm:fixed sm:w-[80%] md:relative md:top-0 md:w-[50%] md:p-[36px] md:py-[72px] lg:flex flex-col items-center justify-stretch gap-3 bg-[#1814F3]  bg-gradient-to-b from-[#1814F3]  to-[#03032A]   rounded-xl">
+        {/* <div className="left xxs:w-full xxs:p-2 xxs:bg-gray-100 xxs:from-transparent xxs:to-transparent md:w-[50%] md:from-[#1814F3]  md:to-[#03032A]  lg:flex flex-col items-center justify-stretch gap-3 bg-[#1814F3]  bg-gradient-to-b  p-[36px] py-[72px] rounded-xl "> */}
+        <h1 className="xxs:hidden md:flex headline text-center font-semibold text-white text-[36px]">
           Welcome to Bank <span className="text-[#FFDD00]">Dash.</span>
         </h1>
-        <div className="sub font-normal text-base text-white opacity-80">
+        <div className=" xxs:hidden md:flex sub font-normal text-base text-white opacity-80">
           &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor &quot;
         </div>
 
-        <div className="flex w-full gap-4 mt-6">
+        <div className="flex w-full xxs:flex-col-reverse xxs:px-[3%] md:px-0 md:flex-row gap-4 mt-6">
           <ProgressComp currentStep={step} />
-          <div className="cont flex flex-col gap-6">
+          <div className="cont flex xxs:flex-row xxs:items-center xxs:justify-center xxs:gap-[19%] md:flex-col md:gap-6">
             <div className="flex flex-col gap-2">
-              <div className="title text-white text-xl font-medium">Step-1</div>
-              <div className="desc text-white opacity-80">
+              <div className="title text-white xxs:text-base  md:text-xl text-nowrap font-medium">
+                Step-1
+              </div>
+              <div className="desc xxs:hidden md:flex text-white opacity-80">
                 Basic information
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="title text-white text-xl font-medium">Step-2</div>
-              <div className="desc text-white opacity-80">
+              <div className="title text-white xxs:text-base  md:text-xl text-nowrap font-medium">
+                Step-2
+              </div>
+              <div className="desc xxs:hidden md:flex text-white opacity-80">
                 Address information
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="title text-white text-xl font-medium">Step-3</div>
-              <div className="desc text-white opacity-80">
+              <div className="title text-white xxs:text-base  md:text-xl text-nowrap font-medium">
+                Step-3
+              </div>
+              <div className="desc xxs:hidden md:flex text-white opacity-80">
                 Personal information
               </div>
             </div>
           </div>
         </div>
-        <div className="already text-gray-300 mt-9">
+        <div className="already xxs:hidden md:flex text-gray-300 mt-9">
           Already have an account?
           <Link
             href="/login"
@@ -125,7 +132,7 @@ const SignUpForm = () => {
       <form
         onSubmit={handleSubmit(onSubmit)}
         onKeyPress={handleKeyPress}
-        className="w-[55%] flex flex-col justify-center items-center"
+        className="xxs:w-[96%] xxs:mt-[7rem] md:w-[55%] md:mt-0 flex flex-col justify-center items-center"
       >
         {step === 1 && (
           <div
@@ -141,7 +148,7 @@ const SignUpForm = () => {
                   alt=""
                 />
               </div>
-              <h3 className="text-2xl font-medium text-[#3C3B8B] text-center">
+              <h3 className="text-2xl text-nowrap font-medium text-[#3C3B8B] text-center">
                 Basic information
               </h3>
             </div>
@@ -275,7 +282,7 @@ const SignUpForm = () => {
                   alt=""
                 />
               </div>
-              <h3 className="text-2xl font-medium text-[#3C3B8B] text-center">
+              <h3 className="text-2xl text-nowrap font-medium text-[#3C3B8B] text-center">
                 Address Information
               </h3>
             </div>
@@ -379,7 +386,7 @@ const SignUpForm = () => {
                   alt=""
                 />
               </div>
-              <h3 className="text-2xl font-medium text-[#3C3B8B] text-center">
+              <h3 className="text-2xl text-nowrap font-medium text-[#3C3B8B] text-center">
                 Personal Information
               </h3>
             </div>
@@ -520,6 +527,15 @@ const SignUpForm = () => {
           )}
         </div>
       </form>
+      <div className="already xxs:flex md:hidden text-gray-500 p-3 pb-6">
+        Already have an account?
+        <Link
+          href="/login"
+          className="login-btn ml-1 text-[#1814f6] font-medium hover:text-blue-700 hover:cursor-pointer underline"
+        >
+          Login
+        </Link>
+      </div>
     </div>
   );
 };

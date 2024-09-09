@@ -37,7 +37,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="relative flex flex-col justify-center gap-2 max-w-[408px] min-w-72 p-10 bg-white rounded-2xl border-[0.3px] border-solid border-[#1814f326] shadow-sm shadow-blue-100 z-20">
+    <div className="relative flex flex-col justify-center gap-2 max-w-[408px] min-w-72 p-10 bg-white rounded-2xl border-[0.3px] border-solid border-[#1814f326] shadow-sm shadow-blue-100 z-20 xxs:h-screen xs:h-[80vh] sm:h-fit">
       {/* Close Button */}
       <button
         onClick={() => router.push("/")}
