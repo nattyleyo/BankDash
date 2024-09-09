@@ -60,6 +60,7 @@ const LoginForm = () => {
           Welcome <span className="text-[#1814F3]">Back.</span>
         </h1>
       </div>
+
       <form
         className="pt-3 flex flex-col gap-2"
         onSubmit={handleSubmit(onSubmit)}
@@ -114,13 +115,49 @@ const LoginForm = () => {
           </button>
         </div>
       </form>
+      {/* <div className="w-full flex justify-center">Or</div> */}
+      {/* <div className="social-login flex justify-center gap-6 w-full"> */}
+      {/* <button
+          onClick={() => signIn("google", { callbackUrl: "/" })}
+          className="flex items-center justify-center border p-2 rounded-xl border-orange-500"
+        >
+          <Image
+            width={32}
+            height={32}
+            src={"/assets/google-icon.png"}
+            alt=""
+          />
+        </button> */}
+      {/* <button
+          onClick={() => signIn("facebook")}
+          className="flex items-center justify-center border p-2 rounded-xl border-blue-600"
+        >
+          <Image
+            width={32}
+            height={32}
+            src={"/assets/facebook-icon.png"}
+            alt=""
+          />
+        </button> */}
+      {/* <button
+          onClick={() => signIn("github", { callbackUrl: "/" })}
+          className="flex  items-center justify-center border p-2 rounded-xl border-black"
+        >
+          <Image
+            width={32}
+            height={32}
+            src={"/assets/github-icon.png"}
+            alt=""
+          />
+        </button> */}
+      {/* </div> */}
 
       <div className="mt-2 text-center text-base font-normal text-slate-600">
         {`Don't have an account?`}
         <Link
           href={`/signup`}
           passHref
-          className="ml-2 font-normal text-[#4640DE] hover:underline"
+          className="ml-2 font-normal text-[#4640DE] underline cursor-pointer"
         >
           SignUp
         </Link>

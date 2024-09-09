@@ -20,7 +20,7 @@ const Header = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const userData = useAppSelector((state) => state.user);
-  console.log(session, "nhgf");
+  // console.log(session, "nhgf");
   const onDarkMode = () => {
     dispatch(toggleDarkMode());
   };

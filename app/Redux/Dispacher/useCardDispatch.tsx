@@ -13,10 +13,8 @@ const useCardDispatch = (accessToken: string) => {
       try {
         dispatch(setStatus("loading"));
         const res: any = await CardService.getAllCards(accessToken);
-        
 
-        console.log(res.content, "myfggggggggggggggg");
-        console.log("Status of Card dispatch",res)
+        // console.log("Status of Card dispatch", "Ok");
 
         if (res) {
           dispatch(setCards(res.content));

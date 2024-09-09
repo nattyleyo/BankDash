@@ -48,22 +48,21 @@ const VisaCard: React.FC<CardType> = ({
       <div className="flex flex-col gap-6 p-6">
         <div className="flex xxs:text-xs md:text-sm">
           <div className="balance-box flex flex-col grow">
-            <div className="label font-normal">
+            <div className="label font-normal flex items-center gap-2">
               Balance
               <button
                 onClick={() => {
                   setFlag(!flag);
                 }}
               >
-                <FontAwesomeIcon icon={flag ? faEyeSlash : faEye} />
+                <FontAwesomeIcon icon={!flag ? faEyeSlash : faEye} />
               </button>
             </div>
             <div
-              className={`balance gap-2 xxs:text-lg md:text-xl font-medium ${
-                flag ? "flex:" : "hidden"
-              }`}
+              className={`balance gap-2 flex xxs:text-lg md:text-xl font-medium
+              `}
             >
-              ${data.balance}
+              $ {flag ? data.balance : "******"}
             </div>
           </div>
           <Image
