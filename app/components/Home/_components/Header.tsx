@@ -65,7 +65,7 @@ const Header = () => {
       {/* Navigation Links (Desktop) */}
       <nav className="hidden lg:flex gap-8 items-center text-lg font-medium dark:text-white">
         <Link
-          href="/dashboard"
+          href={session?.accessToken ? "/dashboard" : "/login"}
           className="hover:text-[#1814f6] dark:hover:text-yellow-400 transition-colors"
         >
           Dashboard
@@ -152,7 +152,7 @@ const Header = () => {
         </div>
         <nav className="flex flex-col gap-4 p-4 px-6 text-lg font-medium dark:text-white">
           <Link
-            href="/dashboard"
+            href={session?.accessToken ? "/dashboard" : "/login"}
             className="hover:text-[#1814f6] dark:hover:text-yellow-400 transition-colors"
             onClick={toggleMenu}
           >
