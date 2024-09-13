@@ -21,7 +21,7 @@ const Download = ({
 
     try {
       const response = await fetch(
-        `https://bankdash-45oo.onrender.com/transactions/${transactionId}`,
+        `https://bank-dash-aykd.onrender.com/transactions/${transactionId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

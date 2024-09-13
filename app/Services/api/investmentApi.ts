@@ -1,6 +1,6 @@
 import axios from "axios";
 const API_URL =
-  "https://bankdash-45oo.onrender.com/user/random-investment-data";
+  "https://bank-dash-aykd.onrender.com/user/random-investment-data";
 interface YearlyInvestment {
   time: string;
   value: number;

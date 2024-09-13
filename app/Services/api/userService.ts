@@ -2,7 +2,7 @@ import axios from "axios";
 import UserValue from "@/types/UserValue";
 import UserPreferenceValue from "@/types/UserPreferenceValue";
 
-const API_URL = "https://bankdash-45oo.onrender.com/user";
+const API_URL = "https://bank-dash-aykd.onrender.com/user";
 
 interface UserResponseValue {
   success: boolean;

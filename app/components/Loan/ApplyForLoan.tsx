@@ -37,7 +37,7 @@ const ApplyLoan: React.FC = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "https://bankdash-45oo.onrender.com/active-loans",
+        "https://bank-dash-aykd.onrender.com/active-loans",
         formData,
         {
           headers: {

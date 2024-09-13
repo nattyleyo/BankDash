@@ -35,7 +35,7 @@ const ModalTrans = ({
     // change to tranService
     try {
       const response = await axios.post(
-        "https://bankdash-45oo.onrender.com/transactions",
+        "https://bank-dash-aykd.onrender.com/transactions",
         formData,
         {
           headers: {

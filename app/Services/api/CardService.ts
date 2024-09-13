@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Assuming you're using the jwt-decode library
 import { checkAndRefreshToken } from "./hooks/useRefresh";
 
-const API_URL = "https://bankdash-45oo.onrender.com/cards"; // Adjust this to match your actual API base URL
+const API_URL = "https://bank-dash-aykd.onrender.com/cards"; // Adjust this to match your actual API base URL
 
 interface Card {
   id?: string;
