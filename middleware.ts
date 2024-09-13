@@ -6,11 +6,11 @@ export async function middleware(request: NextRequest) {
     req: request,
     secret: process.env.JWT_SECRET,
   });
-  if (token) {
-    return NextResponse.next();
+  // console.log(token, "---");
+  if (!token?.accessToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
   }
-
-  return NextResponse.redirect(new URL("/login", request.url));
+  return NextResponse.next();
 }
 
 export const config = {
